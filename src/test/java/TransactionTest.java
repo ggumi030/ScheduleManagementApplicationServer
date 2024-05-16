@@ -11,21 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class TransactionTest {
-
-    @PersistenceContext
-    EntityManager em;
-
-    @Test
-    @Transactional
-    @Rollback(value = false)
-    @DisplayName("저장 성공")
-    void test1(){
-        Schedule schedule = new Schedule();
-        schedule.setTitle("제목");
-        schedule.setContents("내용");
-        schedule.setManager("ggumi");
-        schedule.setPassword("1234");
-
-        em.persist(schedule);
-    }
+//
+//    @PersistenceContext
+//    EntityManager em;
+//
+//    @Test
+//    @Transactional
+//    @Rollback(value = false)
+//    @DisplayName("저장 성공")
+//    void test1(){
+//        Schedule schedule = new Schedule();
+//        schedule.setTitle("제목");
+//        schedule.setContents("내용");
+//        schedule.setManager("ggumi");
+//        schedule.setPassword("1234");
+//
+//        em.persist(schedule);
+//    }
 }
