@@ -6,6 +6,8 @@ import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
 import org.sparta.schedulemanagementapplicationserver.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScheduleService {
     private ScheduleRepository scheduleRepository;
@@ -25,8 +27,13 @@ public class ScheduleService {
         return new ScheduleResponseDto(findSchedule(id));
     }
 
+    public List<ScheduleResponseDto> getAllSchedules() {
+        return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
+    }
+
     private Schedule findSchedule(Long id) {
         return scheduleRepository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("Schedule not found"));
     }
+
 }
