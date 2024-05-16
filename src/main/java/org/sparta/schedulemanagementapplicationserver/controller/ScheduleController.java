@@ -1,6 +1,7 @@
 package org.sparta.schedulemanagementapplicationserver.controller;
 
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
+import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleCheckPasswordRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleResponseDto;
 import org.sparta.schedulemanagementapplicationserver.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
@@ -31,4 +32,17 @@ public class ScheduleController {
     public List<ScheduleResponseDto> getAllSchedules() {
         return scheduleService.getAllSchedules();
     }
+
+//    @PutMapping("/schedule/{id}")
+//    public ScheduleResponseDto updateSchedule(@PathVariable Long id, @RequestParam("checkpassword") String password ,@RequestBody ScheduleRequestDto scheduleRequestDto) {
+//        return scheduleService.updateSchedule(id ,password, scheduleRequestDto);
+//    }
+
+    @PutMapping("/schedule/{id}")
+    public ScheduleResponseDto updateSchedule(@PathVariable Long id , @RequestBody ScheduleCheckPasswordRequestDto checkPasswordRequestDto) {
+        return scheduleService.updateSchedule(id ,checkPasswordRequestDto);
+    }
+
+
+
 }

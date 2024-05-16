@@ -1,5 +1,6 @@
 package org.sparta.schedulemanagementapplicationserver.service;
 
+import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleCheckPasswordRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleResponseDto;
 import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
@@ -29,6 +30,16 @@ public class ScheduleService {
 
     public List<ScheduleResponseDto> getAllSchedules() {
         return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
+    }
+
+    public ScheduleResponseDto updateSchedule(Long id, ScheduleCheckPasswordRequestDto checkPasswordRequestDto) {
+        Schedule schedule = findSchedule(id);
+        if(schedule.getPassword().equals(checkPasswordRequestDto.getCheckpassword())){
+            schedule.update(checkPasswordRequestDto);
+            return new ScheduleResponseDto(schedule);
+        }else{
+            throw new IllegalArgumentException("Wrong password");
+        }
     }
 
     private Schedule findSchedule(Long id) {
