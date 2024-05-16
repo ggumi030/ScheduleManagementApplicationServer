@@ -42,9 +42,18 @@ public class ScheduleService {
         }
     }
 
+    public Long deleteSchedule(Long id, String checkPassword) {
+        Schedule schedule = findSchedule(id);
+        if(schedule.getPassword().equals(checkPassword)){
+            scheduleRepository.delete(schedule);
+            return id;
+        }else{
+            throw new IllegalArgumentException("Wrong password");
+        }
+    }
+
     private Schedule findSchedule(Long id) {
         return scheduleRepository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("Schedule not found"));
     }
-
 }
