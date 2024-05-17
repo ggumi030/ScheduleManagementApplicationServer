@@ -1,6 +1,8 @@
 **나만의 일정 관리 앱 서버 만들기**
 1. Use Case Diagram
-   ![ScheduleManagementSystem drawio](https://github.com/ggumi030/ScheduleManagementApplicationServer/assets/130031828/a298efd8-47d9-4171-93bc-2ab5699f1896)
+
+   ![ScheduleManagementSystem drawio (1)](https://github.com/ggumi030/ScheduleManagementApplicationServer/assets/130031828/dbd11f75-c118-40b2-9b87-ee755b39aea5)
+
 
    <br/>
 
