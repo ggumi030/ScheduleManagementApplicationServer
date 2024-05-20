@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @Service
 public class ScheduleService {
@@ -37,7 +36,7 @@ public class ScheduleService {
     public ScheduleResponseDto updateSchedule(Long id, ScheduleModRequestDto checkPasswordRequestDto) {
         Schedule schedule = findSchedule(id);
 
-        checkPassword(schedule.getPassword(),checkPasswordRequestDto.getCheckpassword());
+        schedule.checkPassword(checkPasswordRequestDto.getCheckpassword());
 
         schedule.update(checkPasswordRequestDto);
         return new ScheduleResponseDto(schedule);
@@ -46,7 +45,7 @@ public class ScheduleService {
     public Long deleteSchedule(Long id, String checkPassword) {
         Schedule schedule = findSchedule(id);
 
-        checkPassword(schedule.getPassword(),checkPassword);
+        schedule.checkPassword(checkPassword);
 
         scheduleRepository.delete(schedule);
         return id;
@@ -54,11 +53,5 @@ public class ScheduleService {
 
     private Schedule findSchedule(Long id) {
         return scheduleRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Schedule not found"));
-    }
-
-    public void checkPassword(String password, String checkpassword) {
-       if(!Objects.equals(password,checkpassword)){
-           throw new IllegalArgumentException("Wrong password");
-       }
     }
 }

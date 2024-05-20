@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -37,6 +39,12 @@ public class Schedule extends Timestamped {
         this.title = checkPasswordRequestDto.getTitle();
         this.contents = checkPasswordRequestDto.getContents();
         this.manager = checkPasswordRequestDto.getManager();
+    }
+
+    public void checkPassword(String checkpassword) {
+        if(!Objects.equals(this.password,checkpassword)){
+            throw new IllegalArgumentException("Wrong password");
+        }
     }
 
 }
