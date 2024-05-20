@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleCheckPasswordRequestDto;
+import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
 
 @Entity
@@ -33,7 +33,7 @@ public class Schedule extends Timestamped {
         this.password = scheduleRequestDto.getPassword();
     }
 
-    public void update(ScheduleCheckPasswordRequestDto checkPasswordRequestDto){
+    public void update(ScheduleModRequestDto checkPasswordRequestDto){
         this.title = checkPasswordRequestDto.getTitle();
         this.contents = checkPasswordRequestDto.getContents();
         this.manager = checkPasswordRequestDto.getManager();

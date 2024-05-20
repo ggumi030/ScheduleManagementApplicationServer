@@ -1,14 +1,12 @@
 package org.sparta.schedulemanagementapplicationserver.service;
 
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleCheckPasswordRequestDto;
+import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
 import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleResponseDto;
 import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
 import org.sparta.schedulemanagementapplicationserver.repository.ScheduleRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.FindException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -36,7 +34,7 @@ public class ScheduleService {
         return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ScheduleResponseDto::new).toList();
     }
 
-    public ScheduleResponseDto updateSchedule(Long id, ScheduleCheckPasswordRequestDto checkPasswordRequestDto) {
+    public ScheduleResponseDto updateSchedule(Long id, ScheduleModRequestDto checkPasswordRequestDto) {
         Schedule schedule = findSchedule(id);
 
         checkPassword(schedule.getPassword(),checkPasswordRequestDto.getCheckpassword());
