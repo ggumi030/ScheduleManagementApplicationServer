@@ -1,10 +1,10 @@
-package org.sparta.schedulemanagementapplicationserver.service;
+package org.sparta.todoappserver.service;
 
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleResponseDto;
-import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
-import org.sparta.schedulemanagementapplicationserver.repository.ScheduleRepository;
+import org.sparta.todoappserver.Dto.ScheduleModRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleResponseDto;
+import org.sparta.todoappserver.entity.Schedule;
+import org.sparta.todoappserver.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

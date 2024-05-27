@@ -1,4 +1,4 @@
-package org.sparta.schedulemanagementapplicationserver.exception;
+package org.sparta.todoappserver.exception;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

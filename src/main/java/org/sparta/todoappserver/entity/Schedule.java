@@ -1,11 +1,11 @@
-package org.sparta.schedulemanagementapplicationserver.entity;
+package org.sparta.todoappserver.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleModRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleRequestDto;
 
 import java.util.Objects;
 

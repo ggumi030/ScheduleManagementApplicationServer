@@ -1,11 +1,11 @@
-package org.sparta.schedulemanagementapplicationserver.Dto;
+package org.sparta.todoappserver.Dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
+import org.sparta.todoappserver.entity.Schedule;
 
 import java.time.LocalDate;
 

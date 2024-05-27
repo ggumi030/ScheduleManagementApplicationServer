@@ -1,4 +1,4 @@
-package org.sparta.schedulemanagementapplicationserver.entity;
+package org.sparta.todoappserver.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

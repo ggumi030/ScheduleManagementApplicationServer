@@ -1,4 +1,4 @@
-package org.sparta.schedulemanagementapplicationserver.Dto;
+package org.sparta.todoappserver.Dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;

@@ -1,4 +1,4 @@
-package org.sparta.schedulemanagementapplicationserver.controller;
+package org.sparta.todoappserver.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,11 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleRequestDto;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleModRequestDto;
-import org.sparta.schedulemanagementapplicationserver.Dto.ScheduleResponseDto;
-import org.sparta.schedulemanagementapplicationserver.service.ScheduleService;
-import org.springframework.validation.BindingResult;
+import org.sparta.todoappserver.Dto.ScheduleModRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleRequestDto;
+import org.sparta.todoappserver.Dto.ScheduleResponseDto;
+import org.sparta.todoappserver.service.ScheduleService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
-package org.sparta.schedulemanagementapplicationserver.repository;
+package org.sparta.todoappserver.repository;
 
-import org.sparta.schedulemanagementapplicationserver.entity.Schedule;
+import org.sparta.todoappserver.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
