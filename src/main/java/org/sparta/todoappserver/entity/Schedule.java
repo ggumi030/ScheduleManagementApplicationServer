@@ -11,7 +11,6 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "schedule")
 @NoArgsConstructor
 public class Schedule extends Timestamped {
@@ -20,12 +19,14 @@ public class Schedule extends Timestamped {
     private Long id;
     @Column(name="title", nullable=false)
     private String title;
-    @Column(name="contents", nullable=false, length=1000)
+    @Column(name="contents", nullable=true, length=1000)
     private String contents;
     @Column(name="manager",nullable = false)
     private String manager;
     @Column(name = "password", nullable = false)
     private String password;
+
+    //user 추가
 
 
     public Schedule(ScheduleRequestDto scheduleRequestDto){

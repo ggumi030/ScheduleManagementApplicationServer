@@ -18,7 +18,7 @@ public class ScheduleRequestDto {
     @Schema(required = false)
     private String contents;
 
-    @Email(message = "이메일 형태여야합니다.")
+    @Email(message = "manager이름은 이메일 형태여야합니다.")
     @Schema(example = "abc@gmail.com", required = true)
     private String manager;
 

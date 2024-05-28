@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.sparta.todoappserver.entity.Schedule;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Schema(description = "비밀번호를 제외한 일정 정보 응답 객체")
 @Getter
@@ -24,13 +25,17 @@ public class ScheduleResponseDto {
     @Schema(example = "contents", required = false)
     private String contents;
 
-    @Email(message = "이메일 형태여야합니다.")
+    @Email(message = "menager 이름은 이메일 형태여야합니다.")
     @Schema(example = "abc@gmail.com", required = true)
     private String manager;
 
     @NotNull(message = "date must not be null")
-    @Schema(example = "2024-05-20", required = true)
-    private LocalDate createdAt;
+    @Schema(example = "2024-05-20 12:33:01.xx", required = true)
+    private LocalDateTime createdAt;
+
+    @NotNull(message = "date must not be null")
+    @Schema(example = "2024-05-21 12:33:01.xx", required = true)
+    private LocalDateTime modifiedAt;
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();
@@ -38,5 +43,6 @@ public class ScheduleResponseDto {
         this.contents = schedule.getContents();
         this.manager = schedule.getManager();
         this.createdAt = schedule.getCreatedAt();
+        this.modifiedAt = schedule.getModifiedAt();
     }
 }
