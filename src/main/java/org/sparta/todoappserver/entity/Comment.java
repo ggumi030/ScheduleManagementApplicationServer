@@ -3,6 +3,7 @@ package org.sparta.todoappserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sparta.todoappserver.Dto.CommentModRequestDto;
 import org.sparta.todoappserver.Dto.CommentRequestDto;
 
 @Entity
@@ -29,6 +30,10 @@ public class Comment extends Timestamped{
         this.contents = commentRequestDto.getContents();
         this.username = commentRequestDto.getUsername();
         this.schedule = schedule;
+    }
+
+    public void update(CommentModRequestDto commentRequestDto) {
+        this.contents = commentRequestDto.getContents();
     }
 
     //user 추가
