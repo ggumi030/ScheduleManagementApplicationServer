@@ -11,7 +11,4 @@ public class CommentDelRequestDto {
     @NotNull(message = "일정 아이디가 필수로 입력되어야합니다.")
     private Long schedule_id;
 
-    @NotNull(message = "사용자 이름은 필수로 입력되어야합니다.")
-    private String username;
-
 }

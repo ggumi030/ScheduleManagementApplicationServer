@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> illegalArgumentExceptionHandler(IllegalArgumentException e) {
+    public ResponseEntity<String> IllegalArgumentExceptionHandler(IllegalArgumentException e) {
         return new ResponseEntity<>("Exception caught : " + e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 

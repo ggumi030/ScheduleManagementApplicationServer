@@ -15,7 +15,4 @@ public class CommentModRequestDto {
     @NotEmpty(message = "댓글 내용은 한 글자 이상 필수로 입력되어야합니다.")
     private String contents;
 
-    @NotNull(message = "사용자 이름은 필수로 입력되어야합니다.")
-    private String username;
-
 }

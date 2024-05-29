@@ -1,5 +1,6 @@
 package org.sparta.todoappserver.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.sparta.todoappserver.Dto.comment.CommentDelRequestDto;
 import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
@@ -22,18 +23,18 @@ public class CommentController {
     }
 
     @PostMapping("/comment")
-    public CommentResponseDto createComment(@Valid @RequestBody CommentRequestDto commentRequestDto) {
-        return commentService.createComment(commentRequestDto);
+    public CommentResponseDto createComment(@Valid @RequestBody CommentRequestDto commentRequestDto,HttpServletRequest request) {
+        return commentService.createComment(commentRequestDto,request);
     }
 
     @PutMapping("/comment")
-    public CommentResponseDto updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto) {
-        return commentService.updateComment(commentRequestDto);
+    public CommentResponseDto updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto, HttpServletRequest request) {
+        return commentService.updateComment(commentRequestDto,request);
     }
 
     @DeleteMapping("/comment")
-    public ResponseEntity<String> deleteComment(@Valid @RequestBody CommentDelRequestDto commentRequestDto) {
-        commentService.deleteComment(commentRequestDto);
+    public ResponseEntity<String> deleteComment(@Valid @RequestBody CommentDelRequestDto commentRequestDto, HttpServletRequest request) {
+        commentService.deleteComment(commentRequestDto,request);
         return new ResponseEntity<>("댓글을 삭제했습니다 !", HttpStatus.OK);
     }
 

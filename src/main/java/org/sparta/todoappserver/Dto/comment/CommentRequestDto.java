@@ -14,7 +14,4 @@ public class CommentRequestDto {
     @NotEmpty(message = "댓글 내용은 한 글자 이상 필수로 입력되어야합니다.")
     private String contents;
 
-    @Email
-    private String username;
-
 }
