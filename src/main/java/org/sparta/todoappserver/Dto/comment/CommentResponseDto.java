@@ -1,4 +1,4 @@
-package org.sparta.todoappserver.Dto;
+package org.sparta.todoappserver.Dto.comment;
 
 import lombok.Getter;
 import org.sparta.todoappserver.entity.Comment;
@@ -18,7 +18,7 @@ public class CommentResponseDto {
     public CommentResponseDto(Comment saveComment) {
         this.id = saveComment.getId();
         this.contents = saveComment.getContents();
-        this.username = saveComment.getUsername();
+        this.username = saveComment.getUser().getUsername();
         this.schedule_id = saveComment.getSchedule().getId();
         this.created_at = saveComment.getCreatedAt();
         this.updated_at = saveComment.getModifiedAt();

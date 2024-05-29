@@ -1,4 +1,4 @@
-package org.sparta.todoappserver.Dto;
+package org.sparta.todoappserver.Dto.schedule;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import org.sparta.todoappserver.entity.Schedule;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Schema(description = "비밀번호를 제외한 일정 정보 응답 객체")

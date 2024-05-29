@@ -3,8 +3,8 @@ package org.sparta.todoappserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sparta.todoappserver.Dto.CommentModRequestDto;
-import org.sparta.todoappserver.Dto.CommentRequestDto;
+import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
+import org.sparta.todoappserver.Dto.comment.CommentRequestDto;
 
 @Entity
 @Getter
@@ -18,18 +18,19 @@ public class Comment extends Timestamped{
     @Column(name = "contents", nullable = false)
     private String contents;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="schedule_id")
     private Schedule schedule;
 
 
-    public Comment(CommentRequestDto commentRequestDto, Schedule schedule) {
+    public Comment(CommentRequestDto commentRequestDto, Schedule schedule, User user) {
         this.contents = commentRequestDto.getContents();
-        this.username = commentRequestDto.getUsername();
         this.schedule = schedule;
+        this.user = user;
     }
 
     public void update(CommentModRequestDto commentRequestDto) {

@@ -1,18 +1,20 @@
-package org.sparta.todoappserver.Dto;
+package org.sparta.todoappserver.Dto.comment;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-public class CommentDelRequestDto {
-    @NotNull(message = "댓글 아이디가 필수로 입력되어야합니다.")
-    private Long comment_id;
+public class CommentRequestDto {
 
     @NotNull(message = "일정 아이디가 필수로 입력되어야합니다.")
     private Long schedule_id;
 
-    @NotNull(message = "사용자 이름은 필수로 입력되어야합니다.")
+    @NotEmpty(message = "댓글 내용은 한 글자 이상 필수로 입력되어야합니다.")
+    private String contents;
+
+    @Email
     private String username;
 
 }
