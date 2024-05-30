@@ -16,15 +16,15 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
-@Slf4j(topic = "AuthFilter")
+@Slf4j(topic = "AuthenticationFilter")
 @Component
-@Order(2)
-public class AuthFilter implements Filter {
+//@Order(2)
+public class JwtAuthorizationFilter implements Filter {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
-    public AuthFilter(UserRepository userRepository, JwtUtil jwtUtil) {
+    public JwtAuthorizationFilter(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
     }
@@ -34,11 +34,13 @@ public class AuthFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String url = httpServletRequest.getRequestURI();
 
+        log.info(url);
+
         if (StringUtils.hasText(url) &&
                 (url.startsWith("/api/user") || url.startsWith("/api/schedule"))
         ) {
             // 회원가입, 로그인 관련 API, 일정 관련 API는 인증 필요없이 요청 진행
-            chain.doFilter(request, response); // 다음 Filter 로 이동
+            //
         } else {
             // 나머지 API 요청은 인증 처리 진행 (comment API)
             // 토큰 확인
@@ -61,14 +63,17 @@ public class AuthFilter implements Filter {
                     );
 
                     request.setAttribute("user", user); //인증완료된 User 객체 request에 담기
-                     chain.doFilter(request, response); // 다음 Filter 로 이동
+                    //
                 } else {
                     throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
                 }
             } catch (IllegalArgumentException | NullPointerException e) {
                 FilterExceptionHandler.handleExceptionInFilter((HttpServletResponse) response, e);
+                return;
             }
         }
+
+        chain.doFilter(request, response); // 다음 Filter 로 이동
 
     }
 

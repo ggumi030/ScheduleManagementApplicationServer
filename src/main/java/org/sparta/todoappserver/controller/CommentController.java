@@ -23,12 +23,12 @@ public class CommentController {
     }
 
     @PostMapping("/comment")
-    public CommentResponseDto createComment(@Valid @RequestBody CommentRequestDto commentRequestDto,HttpServletRequest request) {
+    public ResponseEntity<CommentResponseDto> createComment(@Valid @RequestBody CommentRequestDto commentRequestDto,HttpServletRequest request) {
         return commentService.createComment(commentRequestDto,request);
     }
 
     @PutMapping("/comment")
-    public CommentResponseDto updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto, HttpServletRequest request) {
+    public ResponseEntity<CommentResponseDto> updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto, HttpServletRequest request) {
         return commentService.updateComment(commentRequestDto,request);
     }
 

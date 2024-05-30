@@ -11,6 +11,7 @@ import org.sparta.todoappserver.Dto.schedule.ScheduleModRequestDto;
 import org.sparta.todoappserver.Dto.schedule.ScheduleRequestDto;
 import org.sparta.todoappserver.Dto.schedule.ScheduleResponseDto;
 import org.sparta.todoappserver.service.ScheduleService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class ScheduleController {
 
     @Operation(summary="일정 생성")
     @PostMapping("/schedule")
-    public ScheduleResponseDto createSchedule(@RequestBody @Valid ScheduleRequestDto scheduleRequestDto) {
+    public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody @Valid ScheduleRequestDto scheduleRequestDto) {
         return scheduleService.createSchedule(scheduleRequestDto);
     }
 
@@ -43,14 +44,14 @@ public class ScheduleController {
     @Parameter(name = "id", required = true, schema = @Schema(type = "long", example = "1"))
     @Operation(summary="선택한 일정 조회")
     @GetMapping("/schedule/selected/{id}")
-    public ScheduleResponseDto getSelectedSchedule(@NotNull(message = "id must not be null") @PathVariable Long id) {
+    public ResponseEntity<ScheduleResponseDto> getSelectedSchedule(@NotNull(message = "id must not be null") @PathVariable Long id) {
         return scheduleService.getSelectedSchedule(id);
     }
 
 
     @Operation(summary="모든 일정 조회")
     @GetMapping("/schedule")
-    public List<ScheduleResponseDto> getAllSchedules() {
+    public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
         return scheduleService.getAllSchedules();
     }
 
@@ -63,7 +64,7 @@ public class ScheduleController {
     @Parameter(name = "id", required = true, schema = @Schema(type = "long", example = "1"))
     @Operation(summary="선택한 일정 수정")
     @PutMapping("/schedule/{id}")
-    public ScheduleResponseDto updateSchedule( @NotNull(message = "id must not be null") @PathVariable Long id , @RequestBody @Valid ScheduleModRequestDto scheduleModRequestDto) {
+    public ResponseEntity<ScheduleResponseDto> updateSchedule( @NotNull(message = "id must not be null") @PathVariable Long id , @RequestBody @Valid ScheduleModRequestDto scheduleModRequestDto) {
         return scheduleService.updateSchedule(id ,scheduleModRequestDto);
     }
 

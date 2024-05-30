@@ -32,7 +32,8 @@ public class UserController {
     }
 
     @PostMapping("user/login")
-    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto requestDto, HttpServletResponse httpresponse) {
-        return userService.login(requestDto,httpresponse);
+    public ResponseEntity<LoginResponseDto> login() {
+        LoginResponseDto responseDto = new LoginResponseDto("로그인에 성공했습니다 !", HttpStatus.OK);
+        return new ResponseEntity<>(responseDto,HttpStatus.OK);
     }
 }

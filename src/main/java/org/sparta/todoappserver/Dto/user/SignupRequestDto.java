@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class SignupRequestDto {
     @NotNull(message = "username은 필수로 입력되어야합니다.")
-    @Size(min = 4, max = 30, message = "username은 최소 4자 이상, 10자 이하로 구성되어야합니다.")
+    @Size(min = 4, max = 100, message = "username은 최소 4자 이상, 10자 이하로 구성되어야합니다.")
     @Pattern(regexp = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]+$", message = "username은 이메일 형태로 입력되어야합니다.")
     private String username;
 

@@ -11,6 +11,8 @@ import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.repository.CommentRepository;
 import org.sparta.todoappserver.repository.ScheduleRepository;
 import org.sparta.todoappserver.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,23 +35,21 @@ public class CommentService {
         this.userRepository = userRepository;
     }
 
-    public CommentResponseDto createComment(CommentRequestDto commentRequestDto,HttpServletRequest request) {
+    public ResponseEntity<CommentResponseDto> createComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
 
         Schedule schedule = scheduleRepository.findById(commentRequestDto.getSchedule_id()).orElseThrow(
                 () -> new NoSuchElementException("Schedule not found"));
 
         User user = (User) request.getAttribute("user");
-        //User user = userRepository.findByUsername(commentRequestDto.getUsername()).orElseThrow(
-        //        () -> new NoSuchElementException("User not found"));
 
         Comment comment = new Comment(commentRequestDto,schedule,user);
         Comment saveComment = commentRepository.save(comment);
-        return new CommentResponseDto(saveComment);
+        return new ResponseEntity<>(new CommentResponseDto(saveComment), HttpStatus.OK);
 
     }
 
     @Transactional
-    public CommentResponseDto updateComment(CommentModRequestDto commentRequestDto, HttpServletRequest request) {
+    public ResponseEntity<CommentResponseDto> updateComment(CommentModRequestDto commentRequestDto, HttpServletRequest request) {
         User user = (User) request.getAttribute("user");
 
         Comment comment = checkException(
@@ -59,7 +59,7 @@ public class CommentService {
 
         comment.update(commentRequestDto);
 
-        return new CommentResponseDto(comment);
+        return new ResponseEntity<>(new CommentResponseDto(comment), HttpStatus.OK);
     }
 
 
