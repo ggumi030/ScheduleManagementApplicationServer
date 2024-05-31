@@ -64,24 +64,24 @@ public class UserService {
         return new ResponseEntity<>(responseDto,HttpStatus.OK);
     }
 
-    public ResponseEntity<LoginResponseDto> login(LoginRequestDto requestDto, HttpServletResponse httpresponse) {
-        String username = requestDto.getUsername();
-        String password = requestDto.getPassword();
-
-        //사용자 확인
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new IllegalArgumentException("등록된 사용자가 없습니다."));
-
-        //비밀번호 확인
-        if (!password.equals(user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
-
-        //JWT 생성 및 HTTP header에 저장
-        String token = jwtUtil.createToken(user.getUsername(),user.getRole());
-        httpresponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
-
-        LoginResponseDto responseDto = new LoginResponseDto("로그인에 성공했습니다 !", HttpStatus.OK);
-        return new ResponseEntity<>(responseDto,HttpStatus.OK);
-    }
+//    public ResponseEntity<LoginResponseDto> login(LoginRequestDto requestDto, HttpServletResponse httpresponse) {
+//        String username = requestDto.getUsername();
+//        String password = requestDto.getPassword();
+//
+//        //사용자 확인
+//        User user = userRepository.findByUsername(username).orElseThrow(
+//                () -> new IllegalArgumentException("등록된 사용자가 없습니다."));
+//
+//        //비밀번호 확인
+//        if (!password.equals(user.getPassword())) {
+//            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+//        }
+//
+//        //JWT 생성 및 HTTP header에 저장
+//        String token = jwtUtil.createToken(user.getUsername(),user.getRole());
+//        httpresponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+//
+//        LoginResponseDto responseDto = new LoginResponseDto("로그인에 성공했습니다 !", HttpStatus.OK);
+//        return new ResponseEntity<>(responseDto,HttpStatus.OK);
+//    }
 }

@@ -2,11 +2,13 @@ package org.sparta.todoappserver.filter;
 
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.sparta.todoappserver.entity.User;
+import org.sparta.todoappserver.entity.UserRoleEnum;
 import org.sparta.todoappserver.exception.FilterExceptionHandler;
 import org.sparta.todoappserver.jwt.JwtUtil;
 import org.sparta.todoappserver.repository.UserRepository;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+
+import static org.sparta.todoappserver.jwt.JwtUtil.AUTHORIZATION_KEY;
 
 @Slf4j(topic = "AuthenticationFilter")
 @Component
@@ -32,6 +36,8 @@ public class JwtAuthorizationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
         String url = httpServletRequest.getRequestURI();
 
         log.info(url);
@@ -44,18 +50,25 @@ public class JwtAuthorizationFilter implements Filter {
         } else {
             // 나머지 API 요청은 인증 처리 진행 (comment API)
             // 토큰 확인
-            String tokenValue = jwtUtil.getJwtFromHeader(httpServletRequest);
+            String accessTokenValue = jwtUtil.getAccessJwtFromHeader(httpServletRequest);
+            String refreshTokenValue = jwtUtil.getRefreshJwtFromHeader(httpServletRequest);
+
 
             try {
-                if (StringUtils.hasText(tokenValue)) { // 토큰이 존재하면 검증 시작
+                if (StringUtils.hasText(accessTokenValue)) { // 토큰이 존재하면 검증 시작
 
                     // 토큰 검증
-                    if (!jwtUtil.validateToken(tokenValue)) {
-                        throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
+                    if (!jwtUtil.validateToken(accessTokenValue)) {
+                        if(!jwtUtil.validateToken(refreshTokenValue)) {
+                            throw new IllegalArgumentException("토큰이 유효하지 않습니다. 다시 로그인 해주세요.");
+                        } else{
+                            accessTokenValue = jwtUtil.refreshJWT(httpServletResponse, refreshTokenValue, accessTokenValue);
+                            log.info("jwt토큰 재생성");
+                        }
                     }
 
                     // 토큰에서 사용자 정보 가져오기
-                    Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
+                    Claims info = jwtUtil.getUserInfoFromToken(accessTokenValue);
 
                     //회원 DB에 존재하는지 확인
                     User user = userRepository.findByUsername(info.getSubject()).orElseThrow(() ->
@@ -76,5 +89,6 @@ public class JwtAuthorizationFilter implements Filter {
         chain.doFilter(request, response); // 다음 Filter 로 이동
 
     }
+
 
 }
