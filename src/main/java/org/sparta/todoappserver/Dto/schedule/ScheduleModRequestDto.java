@@ -16,11 +16,4 @@ public class ScheduleModRequestDto {
     @Schema(example = "contents", required = false)
     private String contents;
 
-    @Email(message = "이메일 형태여야합니다.")
-    @Schema(example = "abc@gmail.com", required = true)
-    private String manager;
-
-    @NotNull(message = "password must not be null")
-    @Schema(example = "1234", required = true)
-    private String checkpassword;
 }

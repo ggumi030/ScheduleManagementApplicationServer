@@ -10,10 +10,7 @@ import org.sparta.todoappserver.service.UserService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Valid
 @RestController
@@ -31,7 +28,7 @@ public class UserController {
         return userService.signup(requestDto);
     }
 
-    @PostMapping("user/login")
+    @GetMapping("user/login")
     public ResponseEntity<LoginResponseDto> login() {
         LoginResponseDto responseDto = new LoginResponseDto("로그인에 성공했습니다 !", HttpStatus.OK);
         return new ResponseEntity<>(responseDto,HttpStatus.OK);

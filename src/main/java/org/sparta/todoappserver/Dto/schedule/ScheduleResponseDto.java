@@ -24,10 +24,6 @@ public class ScheduleResponseDto {
     @Schema(example = "contents", required = false)
     private String contents;
 
-    @Email(message = "menager 이름은 이메일 형태여야합니다.")
-    @Schema(example = "abc@gmail.com", required = true)
-    private String manager;
-
     @NotNull(message = "date must not be null")
     @Schema(example = "2024-05-20 12:33:01.xx", required = true)
     private LocalDateTime createdAt;
@@ -40,7 +36,6 @@ public class ScheduleResponseDto {
         this.id = schedule.getId();
         this.title = schedule.getTitle();
         this.contents = schedule.getContents();
-        this.manager = schedule.getManager();
         this.createdAt = schedule.getCreatedAt();
         this.modifiedAt = schedule.getModifiedAt();
     }

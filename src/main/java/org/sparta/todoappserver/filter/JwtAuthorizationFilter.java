@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import static org.sparta.todoappserver.jwt.JwtUtil.AUTHORIZATION_KEY;
 
-@Slf4j(topic = "AuthenticationFilter")
+@Slf4j(topic = "AuthentizationFilter")
 @Component
 //@Order(2)
 public class JwtAuthorizationFilter implements Filter {
@@ -43,9 +43,9 @@ public class JwtAuthorizationFilter implements Filter {
         log.info(url);
 
         if (StringUtils.hasText(url) &&
-                (url.startsWith("/api/user") || url.startsWith("/api/schedule"))
+                (url.startsWith("/api/user") || url.startsWith("/api/schedule/all") || url.startsWith("/api/schedule/selected"))
         ) {
-            // 회원가입, 로그인 관련 API, 일정 관련 API는 인증 필요없이 요청 진행
+            // 회원가입, 로그인 관련 API, 일정 조회 관련 API는 인증 필요없이 요청 진행
             //
         } else {
             // 나머지 API 요청은 인증 처리 진행 (comment API)
@@ -76,7 +76,7 @@ public class JwtAuthorizationFilter implements Filter {
                     );
 
                     request.setAttribute("user", user); //인증완료된 User 객체 request에 담기
-                    //
+
                 } else {
                     throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
                 }

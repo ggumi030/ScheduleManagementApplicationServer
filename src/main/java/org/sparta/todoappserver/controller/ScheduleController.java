@@ -5,11 +5,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.sparta.todoappserver.Dto.schedule.ScheduleModRequestDto;
 import org.sparta.todoappserver.Dto.schedule.ScheduleRequestDto;
 import org.sparta.todoappserver.Dto.schedule.ScheduleResponseDto;
+import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.service.ScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,8 +34,13 @@ public class ScheduleController {
 
     @Operation(summary="일정 생성")
     @PostMapping("/schedule")
-    public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody @Valid ScheduleRequestDto scheduleRequestDto) {
-        return scheduleService.createSchedule(scheduleRequestDto);
+    public ResponseEntity<ScheduleResponseDto> createSchedule(
+            @RequestBody @Valid ScheduleRequestDto scheduleRequestDto,
+            HttpServletRequest request
+            )
+    {
+        User user = (User) request.getAttribute("user");
+        return scheduleService.createSchedule(scheduleRequestDto,user);
     }
 
 
@@ -50,7 +57,7 @@ public class ScheduleController {
 
 
     @Operation(summary="모든 일정 조회")
-    @GetMapping("/schedule")
+    @GetMapping("/schedule/all")
     public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
         return scheduleService.getAllSchedules();
     }
@@ -64,8 +71,13 @@ public class ScheduleController {
     @Parameter(name = "id", required = true, schema = @Schema(type = "long", example = "1"))
     @Operation(summary="선택한 일정 수정")
     @PutMapping("/schedule/{id}")
-    public ResponseEntity<ScheduleResponseDto> updateSchedule( @NotNull(message = "id must not be null") @PathVariable Long id , @RequestBody @Valid ScheduleModRequestDto scheduleModRequestDto) {
-        return scheduleService.updateSchedule(id ,scheduleModRequestDto);
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(
+            @NotNull(message = "id must not be null") @PathVariable Long id ,
+            @RequestBody @Valid ScheduleModRequestDto scheduleModRequestDto,
+            HttpServletRequest request) {
+
+        User user = (User) request.getAttribute("user");
+        return scheduleService.updateSchedule(id ,scheduleModRequestDto,user);
     }
 
 
@@ -77,8 +89,10 @@ public class ScheduleController {
     @Parameter(name = "id", required = true, schema = @Schema(type = "long", example = "1"))
     @Operation(summary="선택한 일정 삭제")
     @DeleteMapping("/schedule/{id}")
-    public Long deleteSchedule(@NotNull(message = "id must not be null") @PathVariable Long id, @NotNull(message = "password must not be null") @RequestParam String checkpassword) {
-        return scheduleService.deleteSchedule(id, checkpassword);
+    public Long deleteSchedule(@NotNull(message = "id must not be null") @PathVariable Long id,
+                               HttpServletRequest request) {
+        User user = (User) request.getAttribute("user");
+        return scheduleService.deleteSchedule(id, user);
     }
 
 

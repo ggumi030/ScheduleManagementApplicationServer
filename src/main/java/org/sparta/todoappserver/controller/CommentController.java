@@ -6,6 +6,7 @@ import org.sparta.todoappserver.Dto.comment.CommentDelRequestDto;
 import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
 import org.sparta.todoappserver.Dto.comment.CommentRequestDto;
 import org.sparta.todoappserver.Dto.comment.CommentResponseDto;
+import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +25,20 @@ public class CommentController {
 
     @PostMapping("/comment")
     public ResponseEntity<CommentResponseDto> createComment(@Valid @RequestBody CommentRequestDto commentRequestDto,HttpServletRequest request) {
-        return commentService.createComment(commentRequestDto,request);
+        User user = (User) request.getAttribute("user");
+        return commentService.createComment(commentRequestDto,user);
     }
 
     @PutMapping("/comment")
     public ResponseEntity<CommentResponseDto> updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto, HttpServletRequest request) {
-        return commentService.updateComment(commentRequestDto,request);
+        User user = (User) request.getAttribute("user");
+        return commentService.updateComment(commentRequestDto,user);
     }
 
     @DeleteMapping("/comment")
     public ResponseEntity<String> deleteComment(@Valid @RequestBody CommentDelRequestDto commentRequestDto, HttpServletRequest request) {
-        commentService.deleteComment(commentRequestDto,request);
+        User user = (User) request.getAttribute("user");
+        commentService.deleteComment(commentRequestDto,user);
         return new ResponseEntity<>("댓글을 삭제했습니다 !", HttpStatus.OK);
     }
 

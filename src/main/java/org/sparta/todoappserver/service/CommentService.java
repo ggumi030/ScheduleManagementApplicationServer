@@ -35,12 +35,10 @@ public class CommentService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<CommentResponseDto> createComment(CommentRequestDto commentRequestDto, HttpServletRequest request) {
+    public ResponseEntity<CommentResponseDto> createComment(CommentRequestDto commentRequestDto, User user) {
 
         Schedule schedule = scheduleRepository.findById(commentRequestDto.getSchedule_id()).orElseThrow(
                 () -> new NoSuchElementException("Schedule not found"));
-
-        User user = (User) request.getAttribute("user");
 
         Comment comment = new Comment(commentRequestDto,schedule,user);
         Comment saveComment = commentRepository.save(comment);
@@ -49,8 +47,7 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseEntity<CommentResponseDto> updateComment(CommentModRequestDto commentRequestDto, HttpServletRequest request) {
-        User user = (User) request.getAttribute("user");
+    public ResponseEntity<CommentResponseDto> updateComment(CommentModRequestDto commentRequestDto, User user) {
 
         Comment comment = checkException(
                 commentRequestDto.getComment_id(),
@@ -63,8 +60,7 @@ public class CommentService {
     }
 
 
-    public void deleteComment(CommentDelRequestDto commentRequestDto, HttpServletRequest request) {
-        User user = (User) request.getAttribute("user");
+    public void deleteComment(CommentDelRequestDto commentRequestDto, User user) {
 
         Comment comment = checkException(
                 commentRequestDto.getComment_id(),

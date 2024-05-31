@@ -18,11 +18,4 @@ public class ScheduleRequestDto {
     @Schema(required = false)
     private String contents;
 
-    @Email(message = "manager이름은 이메일 형태여야합니다.")
-    @Schema(example = "abc@gmail.com", required = true)
-    private String manager;
-
-    @NotNull(message = "password must not be null")
-    @Schema( example = "1234", required = true)
-    private String password;
 }

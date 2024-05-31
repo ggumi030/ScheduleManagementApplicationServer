@@ -20,31 +20,21 @@ public class Schedule extends Timestamped {
     private String title;
     @Column(name="contents", nullable=true, length=1000)
     private String contents;
-    @Column(name="manager",nullable = false)
-    private String manager;
-    @Column(name = "password", nullable = false)
-    private String password;
 
-    //user 추가
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
 
-    public Schedule(ScheduleRequestDto scheduleRequestDto){
+    public Schedule(ScheduleRequestDto scheduleRequestDto,User user){
         this.title = scheduleRequestDto.getTitle();
         this.contents = scheduleRequestDto.getContents();
-        this.manager = scheduleRequestDto.getManager();
-        this.password = scheduleRequestDto.getPassword();
+        this.user = user;
     }
 
-    public void update(ScheduleModRequestDto checkPasswordRequestDto){
-        this.title = checkPasswordRequestDto.getTitle();
-        this.contents = checkPasswordRequestDto.getContents();
-        this.manager = checkPasswordRequestDto.getManager();
-    }
-
-    public void checkPassword(String checkpassword) {
-        if(!Objects.equals(this.password,checkpassword)){
-            throw new IllegalArgumentException("Wrong password");
-        }
+    public void update(ScheduleModRequestDto scheduleModRequestDto){
+        this.title = scheduleModRequestDto.getTitle();
+        this.contents = scheduleModRequestDto.getContents();
     }
 
 }

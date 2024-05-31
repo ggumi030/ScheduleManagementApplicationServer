@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Slf4j(topic = "Authorization: 로그인 및 JWT 생성")
+@Slf4j(topic = "Authentication: 로그인 및 JWT 생성")
 @Component
 //@Order(3)
 //@WebFilter("/api/user/login")
