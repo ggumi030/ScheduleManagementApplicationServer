@@ -52,7 +52,7 @@ public class ScheduleService {
         return id;
     }
 
-    private Schedule findSchedule(Long id) {
+    public Schedule findSchedule(Long id) {
         return scheduleRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Schedule not found"));
     }
 

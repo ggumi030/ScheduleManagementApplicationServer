@@ -17,22 +17,20 @@ import java.util.NoSuchElementException;
 @Service
 public class CommentService {
 
-    private final ScheduleRepository scheduleRepository;
+    private final ScheduleService scheduleService;
     private final CommentRepository commentRepository;
 
     public CommentService(
-            ScheduleRepository scheduleRepository,
+            ScheduleService scheduleService,
             CommentRepository commentRepository)
     {
-        this.scheduleRepository = scheduleRepository;
+        this.scheduleService = scheduleService;
         this.commentRepository = commentRepository;
 
     }
 
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto, User user) {
-
-        Schedule schedule = scheduleRepository.findById(commentRequestDto.getSchedule_id()).orElseThrow(
-                () -> new NoSuchElementException("Schedule not found"));
+        Schedule schedule = scheduleService.findSchedule(commentRequestDto.getSchedule_id());
 
         Comment comment = new Comment(commentRequestDto,schedule,user);
         Comment saveComment = commentRepository.save(comment);
@@ -71,8 +69,7 @@ public class CommentService {
                 () -> new NoSuchElementException("Comment not found"));
 
         //일정 예외
-        scheduleRepository.findById(schedule_id).orElseThrow(
-                () -> new NoSuchElementException("Schedule not found"));
+        scheduleService.findSchedule(schedule_id);
 
         //사용자 예외
         if(!comment.getUser().getUsername().equals(username)){
