@@ -21,8 +21,8 @@ import java.util.NoSuchElementException;
 @Service
 public class CommentService {
 
-    ScheduleRepository scheduleRepository;
-    CommentRepository commentRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
 
     public CommentService(
             ScheduleRepository scheduleRepository,

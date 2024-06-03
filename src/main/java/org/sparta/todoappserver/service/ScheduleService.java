@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class ScheduleService {
-    private ScheduleRepository scheduleRepository;
+    private final ScheduleRepository scheduleRepository;
 
     public ScheduleService(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
