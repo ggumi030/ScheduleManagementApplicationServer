@@ -9,9 +9,9 @@ import org.sparta.todoappserver.entity.Schedule;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "비밀번호를 제외한 일정 정보 응답 객체")
+@Schema(description = "일정 정보 응답 객체")
 @Getter
-public class ScheduleResponseDto {
+public class ScheduleCreateResponseDto {
     @NotNull(message = "id must not be null")
     @Schema(example = "1", required = true)
     private Long id;
@@ -32,11 +32,14 @@ public class ScheduleResponseDto {
     @Schema(example = "2024-05-21 12:33:01.xx", required = true)
     private LocalDateTime modifiedAt;
 
-    public ScheduleResponseDto(Schedule schedule) {
+    private Image image;
+
+    public ScheduleCreateResponseDto(Schedule schedule, Image image) {
         this.id = schedule.getId();
         this.title = schedule.getTitle();
         this.contents = schedule.getContents();
         this.createdAt = schedule.getCreatedAt();
         this.modifiedAt = schedule.getModifiedAt();
+        this.image = image;
     }
 }

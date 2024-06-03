@@ -30,7 +30,7 @@ public class User extends Timestamped{
     //EnumType.STRING : Enum의 이름 그대로를 데이터베이스에 저장 USER -> USER
     private UserRoleEnum role;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Schedule> scheduleList = new ArrayList<>();
 
 

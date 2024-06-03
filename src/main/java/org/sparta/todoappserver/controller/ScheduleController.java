@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
+import org.sparta.todoappserver.dto.schedule.ScheduleCreateResponseDto;
 import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
 import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
 import org.sparta.todoappserver.dto.schedule.ScheduleResponseDto;
@@ -17,12 +19,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Tag(name ="일정 관리 API Controller")
 @RestController
 @Validated
+@Slf4j
 @RequestMapping("/api")
 public class ScheduleController {
 
@@ -35,11 +40,14 @@ public class ScheduleController {
 
     @Operation(summary="일정 생성")
     @PostMapping("/schedule")
-    public ResponseEntity<ScheduleResponseDto> createSchedule(
-            @RequestBody @Valid ScheduleRequestDto scheduleRequestDto,
+    public ResponseEntity<ScheduleCreateResponseDto> createSchedule (
+            @ModelAttribute @Valid ScheduleRequestDto scheduleRequestDto,
             HttpServletRequest request
-            )
+            )throws IOException
     {
+        // log.info("asdaf{}", scheduleRequestDto.getTitle());
+        // log.info("asdfa{}", scheduleRequestDto.getContents());
+
         User user = (User) request.getAttribute("user");
         return new ResponseEntity<>(scheduleService.createSchedule(scheduleRequestDto,user), HttpStatus.OK);
     }

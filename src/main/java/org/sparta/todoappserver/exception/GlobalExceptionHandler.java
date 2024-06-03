@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<String> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException e) {
+        return new ResponseEntity<>("Exception caught : " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<String> ioExceptionHandler(IOException e) {
         return new ResponseEntity<>("Exception caught : " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
