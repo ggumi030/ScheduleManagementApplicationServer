@@ -3,11 +3,13 @@ package org.sparta.todoappserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.sparta.todoappserver.dto.comment.CommentModRequestDto;
 import org.sparta.todoappserver.dto.comment.CommentRequestDto;
 
 @Entity
 @Getter
+@Setter
 @Table(name ="comment")
 @NoArgsConstructor
 public class Comment extends Timestamped{

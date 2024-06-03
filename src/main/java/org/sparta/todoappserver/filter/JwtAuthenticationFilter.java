@@ -51,10 +51,10 @@ public class JwtAuthenticationFilter implements Filter {
 
             //JWT 생성 및 HTTP header에 저장
             //access 토큰
-            String accessToken = jwtUtil.addTokenToHeader(httpServletResponse,user.getUsername(),user.getRole(),jwtUtil.ACCESS_TOKEN_TIME);
+            jwtUtil.addTokenToHeader(httpServletResponse,user.getUsername(),user.getRole(),jwtUtil.ACCESS_TOKEN_TIME);
 
             //refresh 토큰
-            String refreshToken = jwtUtil.addTokenToHeader(httpServletResponse,user.getUsername(),user.getRole(),jwtUtil.REFRESH_TOKEN_TIME);
+            jwtUtil.addTokenToHeader(httpServletResponse,user.getUsername(),user.getRole(),jwtUtil.REFRESH_TOKEN_TIME);
 
             log.info("jwt 생성");
 

@@ -45,6 +45,7 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule);
     }
 
+    @Transactional
     public Long deleteSchedule(Long id, User user) {
         Schedule schedule = findSchedule(id);
         checkUser(schedule, user);
