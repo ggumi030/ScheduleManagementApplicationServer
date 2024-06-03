@@ -1,13 +1,10 @@
 package org.sparta.todoappserver.controller;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.sparta.todoappserver.Dto.user.LoginRequestDto;
-import org.sparta.todoappserver.Dto.user.LoginResponseDto;
-import org.sparta.todoappserver.Dto.user.SignupRequestDto;
-import org.sparta.todoappserver.Dto.user.SignupResponseDto;
+import org.sparta.todoappserver.dto.user.LoginResponseDto;
+import org.sparta.todoappserver.dto.user.SignupRequestDto;
+import org.sparta.todoappserver.dto.user.SignupResponseDto;
 import org.sparta.todoappserver.service.UserService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

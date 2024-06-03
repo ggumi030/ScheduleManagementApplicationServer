@@ -1,4 +1,4 @@
-package org.sparta.todoappserver.Dto.comment;
+package org.sparta.todoappserver.dto.comment;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

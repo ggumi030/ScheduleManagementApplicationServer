@@ -3,10 +3,8 @@ package org.sparta.todoappserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sparta.todoappserver.Dto.schedule.ScheduleModRequestDto;
-import org.sparta.todoappserver.Dto.schedule.ScheduleRequestDto;
-
-import java.util.Objects;
+import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
+import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
 
 @Entity
 @Getter

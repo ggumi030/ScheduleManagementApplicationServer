@@ -2,20 +2,14 @@ package org.sparta.todoappserver.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.sparta.todoappserver.Dto.user.LoginRequestDto;
-import org.sparta.todoappserver.Dto.user.LoginResponseDto;
+import org.sparta.todoappserver.dto.user.LoginRequestDto;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.exception.FilterExceptionHandler;
 import org.sparta.todoappserver.jwt.JwtUtil;
 import org.sparta.todoappserver.repository.UserRepository;
-import org.sparta.todoappserver.service.UserService;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

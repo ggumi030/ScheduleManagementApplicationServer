@@ -2,10 +2,10 @@ package org.sparta.todoappserver.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.sparta.todoappserver.Dto.comment.CommentDelRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentResponseDto;
+import org.sparta.todoappserver.dto.comment.CommentDelRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentModRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentResponseDto;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.service.CommentService;
 import org.springframework.http.HttpStatus;

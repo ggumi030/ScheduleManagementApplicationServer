@@ -1,4 +1,4 @@
-package org.sparta.todoappserver.Dto.user;
+package org.sparta.todoappserver.dto.user;
 
 import lombok.Getter;
 

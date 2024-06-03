@@ -3,8 +3,8 @@ package org.sparta.todoappserver.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentModRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentRequestDto;
 
 @Entity
 @Getter

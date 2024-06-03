@@ -1,16 +1,12 @@
 package org.sparta.todoappserver.service;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.sparta.todoappserver.Dto.user.LoginRequestDto;
-import org.sparta.todoappserver.Dto.user.LoginResponseDto;
-import org.sparta.todoappserver.Dto.user.SignupRequestDto;
-import org.sparta.todoappserver.Dto.user.SignupResponseDto;
+import org.sparta.todoappserver.dto.user.SignupRequestDto;
+import org.sparta.todoappserver.dto.user.SignupResponseDto;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.entity.UserRoleEnum;
 import org.sparta.todoappserver.jwt.JwtUtil;
 import org.sparta.todoappserver.repository.UserRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

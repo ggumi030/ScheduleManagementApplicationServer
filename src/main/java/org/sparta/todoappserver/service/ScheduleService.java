@@ -1,14 +1,11 @@
 package org.sparta.todoappserver.service;
 
-import org.sparta.todoappserver.Dto.schedule.ScheduleModRequestDto;
-import org.sparta.todoappserver.Dto.schedule.ScheduleRequestDto;
-import org.sparta.todoappserver.Dto.schedule.ScheduleResponseDto;
-import org.sparta.todoappserver.entity.Comment;
+import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
+import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
+import org.sparta.todoappserver.dto.schedule.ScheduleResponseDto;
 import org.sparta.todoappserver.entity.Schedule;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.repository.ScheduleRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

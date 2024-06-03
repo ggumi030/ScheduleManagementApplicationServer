@@ -1,18 +1,14 @@
 package org.sparta.todoappserver.service;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.sparta.todoappserver.Dto.comment.CommentDelRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentModRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentRequestDto;
-import org.sparta.todoappserver.Dto.comment.CommentResponseDto;
+import org.sparta.todoappserver.dto.comment.CommentDelRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentModRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentRequestDto;
+import org.sparta.todoappserver.dto.comment.CommentResponseDto;
 import org.sparta.todoappserver.entity.Comment;
 import org.sparta.todoappserver.entity.Schedule;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.repository.CommentRepository;
 import org.sparta.todoappserver.repository.ScheduleRepository;
-import org.sparta.todoappserver.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
