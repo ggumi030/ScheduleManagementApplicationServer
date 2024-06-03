@@ -9,7 +9,7 @@ import org.sparta.todoappserver.entity.Schedule;
 
 import java.time.LocalDateTime;
 
-@Schema(description = "비밀번호를 제외한 일정 정보 응답 객체")
+@Schema(description = "일정 정보 응답 객체")
 @Getter
 public class ScheduleResponseDto {
     @NotNull(message = "id must not be null")

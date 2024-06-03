@@ -1,10 +1,7 @@
 package org.sparta.todoappserver.service;
 
 import jakarta.validation.Valid;
-import org.sparta.todoappserver.dto.schedule.ScheduleCreateResponseDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleResponseDto;
+import org.sparta.todoappserver.dto.schedule.*;
 import org.sparta.todoappserver.entity.Image;
 import org.sparta.todoappserver.entity.Schedule;
 import org.sparta.todoappserver.entity.User;
@@ -30,7 +27,7 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleCreateResponseDto createSchedule(ScheduleRequestDto scheduleRequestDto, User user) throws IOException {
+    public ScheduleCreateResponseDto createSchedule(ScheduleCreateRequestDto scheduleRequestDto, User user) throws IOException {
         MultipartFile file = scheduleRequestDto.getImage();
 
         String originalFilename = file.getOriginalFilename();

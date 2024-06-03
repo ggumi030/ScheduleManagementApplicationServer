@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
-@Schema(description = "일정 요청 객체")
+@Schema(description = "일정 생성 요청 객체")
 @Getter
 @AllArgsConstructor
-public class ScheduleRequestDto {
+public class ScheduleCreateRequestDto {
 
     @NotBlank(message = "title must not be blank")
     @Size(min=1, max= 200, message = "title must be between 1 and 200 characters")
@@ -18,5 +18,7 @@ public class ScheduleRequestDto {
 
     @Schema(required = false)
     private String contents;
+
+    private MultipartFile image;
 
 }

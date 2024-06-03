@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.sparta.todoappserver.dto.schedule.ScheduleCreateRequestDto;
 import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
 import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
 
@@ -36,7 +37,7 @@ public class Schedule extends Timestamped {
     private Image image;
 
 
-    public Schedule(ScheduleRequestDto scheduleRequestDto,User user,Image image){
+    public Schedule(ScheduleCreateRequestDto scheduleRequestDto, User user, Image image){
         this.title = scheduleRequestDto.getTitle();
         this.contents = scheduleRequestDto.getContents();
         this.user = user;

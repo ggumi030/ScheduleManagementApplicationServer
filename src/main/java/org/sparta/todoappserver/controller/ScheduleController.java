@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
-import org.sparta.todoappserver.dto.schedule.ScheduleCreateResponseDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleModRequestDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleRequestDto;
-import org.sparta.todoappserver.dto.schedule.ScheduleResponseDto;
+import org.sparta.todoappserver.dto.schedule.*;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.service.ScheduleService;
 import org.springframework.http.HttpStatus;
@@ -41,7 +38,7 @@ public class ScheduleController {
     @Operation(summary="일정 생성")
     @PostMapping("/schedule")
     public ResponseEntity<ScheduleCreateResponseDto> createSchedule (
-            @ModelAttribute @Valid ScheduleRequestDto scheduleRequestDto,
+            @ModelAttribute @Valid ScheduleCreateRequestDto scheduleRequestDto,
             HttpServletRequest request
             )throws IOException
     {

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 
-@Schema(description = "확인용 비밀번호를 포함한 일정 수정 요청 객체")
+@Schema(description = "일정 수정 요청 객체")
 @Getter
 public class ScheduleModRequestDto {
 
