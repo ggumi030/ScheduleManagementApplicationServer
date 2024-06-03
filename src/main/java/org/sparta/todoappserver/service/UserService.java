@@ -30,7 +30,7 @@ public class UserService {
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
 
-    public ResponseEntity<SignupResponseDto> signup(SignupRequestDto requestDto) {
+    public SignupResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword(); //패스워드 암호화 하지 않기(security 사용 X)
 
@@ -61,7 +61,7 @@ public class UserService {
         userRepository.save(user);
 
         SignupResponseDto responseDto = new SignupResponseDto("회원가입에 성공했습니다 !", HttpStatus.OK);
-        return new ResponseEntity<>(responseDto,HttpStatus.OK);
+        return responseDto;
     }
 
 //    public ResponseEntity<LoginResponseDto> login(LoginRequestDto requestDto, HttpServletResponse httpresponse) {

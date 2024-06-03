@@ -26,13 +26,13 @@ public class CommentController {
     @PostMapping("/comment")
     public ResponseEntity<CommentResponseDto> createComment(@Valid @RequestBody CommentRequestDto commentRequestDto,HttpServletRequest request) {
         User user = (User) request.getAttribute("user");
-        return commentService.createComment(commentRequestDto,user);
+        return new ResponseEntity<>(commentService.createComment(commentRequestDto,user), HttpStatus.OK);
     }
 
     @PutMapping("/comment")
     public ResponseEntity<CommentResponseDto> updateComment(@Valid @RequestBody CommentModRequestDto commentRequestDto, HttpServletRequest request) {
         User user = (User) request.getAttribute("user");
-        return commentService.updateComment(commentRequestDto,user);
+        return new ResponseEntity<>(commentService.updateComment(commentRequestDto,user), HttpStatus.OK);
     }
 
     @DeleteMapping("/comment")

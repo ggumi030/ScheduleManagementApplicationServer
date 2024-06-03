@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j(topic="AuthFilterException")
-public class FilterExceptionHandler extends Exception {
+public class FilterExceptionHandler {
    public static <T extends Exception> void handleExceptionInFilter(HttpServletResponse servletResponse, T e)throws IOException {
        log.error(e.getMessage());
 

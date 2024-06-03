@@ -23,31 +23,29 @@ public class CommentService {
 
     ScheduleRepository scheduleRepository;
     CommentRepository commentRepository;
-    UserRepository userRepository;
 
     public CommentService(
             ScheduleRepository scheduleRepository,
-            CommentRepository commentRepository,
-            UserRepository userRepository)
+            CommentRepository commentRepository)
     {
         this.scheduleRepository = scheduleRepository;
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
+
     }
 
-    public ResponseEntity<CommentResponseDto> createComment(CommentRequestDto commentRequestDto, User user) {
+    public CommentResponseDto createComment(CommentRequestDto commentRequestDto, User user) {
 
         Schedule schedule = scheduleRepository.findById(commentRequestDto.getSchedule_id()).orElseThrow(
                 () -> new NoSuchElementException("Schedule not found"));
 
         Comment comment = new Comment(commentRequestDto,schedule,user);
         Comment saveComment = commentRepository.save(comment);
-        return new ResponseEntity<>(new CommentResponseDto(saveComment), HttpStatus.OK);
+        return new CommentResponseDto(saveComment);
 
     }
 
     @Transactional
-    public ResponseEntity<CommentResponseDto> updateComment(CommentModRequestDto commentRequestDto, User user) {
+    public CommentResponseDto updateComment(CommentModRequestDto commentRequestDto, User user) {
 
         Comment comment = checkException(
                 commentRequestDto.getComment_id(),
@@ -56,7 +54,7 @@ public class CommentService {
 
         comment.update(commentRequestDto);
 
-        return new ResponseEntity<>(new CommentResponseDto(comment), HttpStatus.OK);
+        return new CommentResponseDto(comment);
     }
 
 

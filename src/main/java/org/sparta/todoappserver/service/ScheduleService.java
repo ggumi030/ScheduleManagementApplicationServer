@@ -23,30 +23,29 @@ public class ScheduleService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public ResponseEntity<ScheduleResponseDto> createSchedule(ScheduleRequestDto scheduleRequestDto, User user) {
+    public ScheduleResponseDto createSchedule(ScheduleRequestDto scheduleRequestDto, User user) {
         Schedule schedule = new Schedule(scheduleRequestDto,user);
         Schedule saveSchedule = scheduleRepository.save(schedule);
-        ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(saveSchedule);
-        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.OK);
+        return new ScheduleResponseDto(saveSchedule);
     }
 
-    public ResponseEntity<ScheduleResponseDto> getSelectedSchedule(Long id) {
-        return new ResponseEntity<>(new ScheduleResponseDto(findSchedule(id)), HttpStatus.OK);
+    public ScheduleResponseDto getSelectedSchedule(Long id) {
+        return new ScheduleResponseDto(findSchedule(id));
     }
 
-    public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
-        return new ResponseEntity<>(scheduleRepository.findAllByOrderByCreatedAtDesc()
+    public List<ScheduleResponseDto> getAllSchedules() {
+        return scheduleRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
                 .map(ScheduleResponseDto::new)
-                .toList(), HttpStatus.OK);
+                .toList();
     }
 
     @Transactional
-    public ResponseEntity<ScheduleResponseDto> updateSchedule(Long id, ScheduleModRequestDto scheduleModRequestDto,User user) {
+    public ScheduleResponseDto updateSchedule(Long id, ScheduleModRequestDto scheduleModRequestDto,User user) {
         Schedule schedule = findSchedule(id);
         checkUser(schedule, user);
         schedule.update(scheduleModRequestDto);
-        return new ResponseEntity<>(new ScheduleResponseDto(schedule), HttpStatus.OK);
+        return new ScheduleResponseDto(schedule);
     }
 
     public Long deleteSchedule(Long id, User user) {

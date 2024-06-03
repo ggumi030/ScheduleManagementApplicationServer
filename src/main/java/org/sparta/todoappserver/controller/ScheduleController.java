@@ -13,6 +13,7 @@ import org.sparta.todoappserver.Dto.schedule.ScheduleRequestDto;
 import org.sparta.todoappserver.Dto.schedule.ScheduleResponseDto;
 import org.sparta.todoappserver.entity.User;
 import org.sparta.todoappserver.service.ScheduleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class ScheduleController {
             )
     {
         User user = (User) request.getAttribute("user");
-        return scheduleService.createSchedule(scheduleRequestDto,user);
+        return new ResponseEntity<>(scheduleService.createSchedule(scheduleRequestDto,user), HttpStatus.OK);
     }
 
 
@@ -52,14 +53,14 @@ public class ScheduleController {
     @Operation(summary="선택한 일정 조회")
     @GetMapping("/schedule/selected/{id}")
     public ResponseEntity<ScheduleResponseDto> getSelectedSchedule(@NotNull(message = "id must not be null") @PathVariable Long id) {
-        return scheduleService.getSelectedSchedule(id);
+        return new ResponseEntity<>(scheduleService.getSelectedSchedule(id), HttpStatus.OK);
     }
 
 
     @Operation(summary="모든 일정 조회")
     @GetMapping("/schedule/all")
     public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
-        return scheduleService.getAllSchedules();
+        return new ResponseEntity<>(scheduleService.getAllSchedules(), HttpStatus.OK);
     }
 
 
@@ -77,7 +78,8 @@ public class ScheduleController {
             HttpServletRequest request) {
 
         User user = (User) request.getAttribute("user");
-        return scheduleService.updateSchedule(id ,scheduleModRequestDto,user);
+        ScheduleResponseDto responseDto= scheduleService.updateSchedule(id ,scheduleModRequestDto,user);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
 

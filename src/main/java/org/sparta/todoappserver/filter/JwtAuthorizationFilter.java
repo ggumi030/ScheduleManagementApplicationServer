@@ -58,14 +58,13 @@ public class JwtAuthorizationFilter implements Filter {
                 if (StringUtils.hasText(accessTokenValue)) { // 토큰이 존재하면 검증 시작
 
                     // 토큰 검증
-                    if (!jwtUtil.validateToken(accessTokenValue)) {
-                        if(!jwtUtil.validateToken(refreshTokenValue)) {
+                    if (!jwtUtil.validateToken(accessTokenValue) && !jwtUtil.validateToken(refreshTokenValue)) {
                             throw new IllegalArgumentException("토큰이 유효하지 않습니다. 다시 로그인 해주세요.");
-                        } else{
+                    } else{
                             accessTokenValue = jwtUtil.refreshJWT(httpServletResponse, refreshTokenValue, accessTokenValue);
                             log.info("jwt토큰 재생성");
-                        }
                     }
+
 
                     // 토큰에서 사용자 정보 가져오기
                     Claims info = jwtUtil.getUserInfoFromToken(accessTokenValue);
