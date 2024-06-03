@@ -27,8 +27,8 @@ public class JwtUtil {
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer ";
     // 토큰 만료시간
-    private final long ACCESS_TOKEN_TIME = 60 * 1000L; // 60분 (기준 ms)
-    private final long REFRESH_TOKEN_TIME = 24 * ACCESS_TOKEN_TIME;
+    public final long ACCESS_TOKEN_TIME = 60 * 1000L; // 60초 (기준 ms)
+    public final long REFRESH_TOKEN_TIME = 24 * ACCESS_TOKEN_TIME;
 
     @Value("${jwt.secret.key}") // properties에 저장해둔 Base64 Encode 한 SecretKey 가져오기
     private String secretKey;
@@ -42,44 +42,23 @@ public class JwtUtil {
     }
 
     // 토큰 생성 (JWT 생성)
-    public String createAccessToken(String username, UserRoleEnum role) {
+    public String createToken(String username, UserRoleEnum role, long tokenTime) {
         Date date = new Date();
 
         return BEARER_PREFIX +
                 Jwts.builder()
                         .setSubject(username) // 사용자 식별자값(ID)
                         .claim(AUTHORIZATION_KEY, role) // 사용자 권한
-                        .setExpiration(new Date(date.getTime() + ACCESS_TOKEN_TIME)) // 만료 시간
+                        .setExpiration(new Date(date.getTime() + tokenTime)) // 만료 시간
                         .setIssuedAt(date) // 발급일
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘
                         .compact();
     }
 
-    public String createRefreshToken(String username,UserRoleEnum role){
-        Date date = new Date();
-
-        return BEARER_PREFIX +
-                Jwts.builder()
-                        .setSubject(username)
-                        .claim(AUTHORIZATION_KEY, role) // 사용자 권한
-                        .setExpiration(new Date(date.getTime() + REFRESH_TOKEN_TIME))
-                        .setIssuedAt(date)
-                        .signWith(key,signatureAlgorithm)
-                        .compact();
-    }
-
     // header 에서 JWT 가져오기
-    public String getAccessJwtFromHeader(HttpServletRequest request) {
-        String bearerToken = request.getHeader(ACCESS_AUTHORIZATION_HEADER);
+    public String getJwtFromHeader(HttpServletRequest request,String header) {
+        String bearerToken = request.getHeader(header);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-
-    public String getRefreshJwtFromHeader(HttpServletRequest request) {
-        String bearerToken = request.getHeader(REFRESH_AUTHORIZATION_HEADER);
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
         return null;
@@ -117,7 +96,7 @@ public class JwtUtil {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    public String refreshJWT(HttpServletResponse httpServletResponse, String refreshTokenValue, String accessTokenValue) throws IOException {
+    public String refreshJWT(HttpServletResponse httpServletResponse, String refreshTokenValue) throws IOException {
         //유저정보 가져오기
         Claims info = getUserInfoFromToken(refreshTokenValue);
         //유저 role 정보 가져오기
@@ -131,13 +110,23 @@ public class JwtUtil {
 
         //JWT 생성 및 HTTP header에 저장
         //access 토큰
-        accessTokenValue = createAccessToken(info.getSubject(),role);
-        httpServletResponse.addHeader(JwtUtil.ACCESS_AUTHORIZATION_HEADER, accessTokenValue);
+        String accessTokenValue = addTokenToHeader(httpServletResponse,info.getSubject(),role,ACCESS_TOKEN_TIME);
 
         //refresh 토큰
-        refreshTokenValue = createRefreshToken(info.getSubject(),role);
-        httpServletResponse.addHeader(JwtUtil.REFRESH_AUTHORIZATION_HEADER ,refreshTokenValue);
+        refreshTokenValue = addTokenToHeader(httpServletResponse,info.getSubject(),role,REFRESH_TOKEN_TIME);
 
         return accessTokenValue = accessTokenValue.substring(7);
+    }
+
+    public String addTokenToHeader(HttpServletResponse httpServletResponse,String username, UserRoleEnum role, long tokenTime) throws IOException {
+        String tokenValue = createToken(username,role,tokenTime);
+
+        if(ACCESS_TOKEN_TIME == tokenTime){
+            httpServletResponse.addHeader(JwtUtil.ACCESS_AUTHORIZATION_HEADER, tokenValue);
+        }else{
+            httpServletResponse.addHeader(JwtUtil.REFRESH_AUTHORIZATION_HEADER, tokenValue);
+        }
+
+        return tokenValue;
     }
 }

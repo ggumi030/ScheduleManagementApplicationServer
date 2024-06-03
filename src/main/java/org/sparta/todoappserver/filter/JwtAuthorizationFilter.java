@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
-import static org.sparta.todoappserver.jwt.JwtUtil.AUTHORIZATION_KEY;
+import static org.sparta.todoappserver.jwt.JwtUtil.*;
 
 @Slf4j(topic = "AuthentizationFilter")
 @Component
@@ -50,8 +50,8 @@ public class JwtAuthorizationFilter implements Filter {
         } else {
             // 나머지 API 요청은 인증 처리 진행 (comment API)
             // 토큰 확인
-            String accessTokenValue = jwtUtil.getAccessJwtFromHeader(httpServletRequest);
-            String refreshTokenValue = jwtUtil.getRefreshJwtFromHeader(httpServletRequest);
+            String accessTokenValue = jwtUtil.getJwtFromHeader(httpServletRequest,ACCESS_AUTHORIZATION_HEADER);
+            String refreshTokenValue = jwtUtil.getJwtFromHeader(httpServletRequest,REFRESH_AUTHORIZATION_HEADER);
 
 
             try {
@@ -61,7 +61,7 @@ public class JwtAuthorizationFilter implements Filter {
                     if (!jwtUtil.validateToken(accessTokenValue) && !jwtUtil.validateToken(refreshTokenValue)) {
                             throw new IllegalArgumentException("토큰이 유효하지 않습니다. 다시 로그인 해주세요.");
                     } else{
-                            accessTokenValue = jwtUtil.refreshJWT(httpServletResponse, refreshTokenValue, accessTokenValue);
+                            accessTokenValue = jwtUtil.refreshJWT(httpServletResponse, refreshTokenValue);
                             log.info("jwt토큰 재생성");
                     }
 
