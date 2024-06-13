@@ -46,13 +46,11 @@ public class JwtAuthorizationFilter implements Filter {
                 (url.startsWith("/api/user") || url.startsWith("/api/schedule/all") || url.startsWith("/api/schedule/selected"))
         ) {
             // 회원가입, 로그인 관련 API, 일정 조회 관련 API는 인증 필요없이 요청 진행
-            //
         } else {
             // 나머지 API 요청은 인증 처리 진행 (comment API)
             // 토큰 확인
             String accessTokenValue = jwtUtil.getJwtFromHeader(httpServletRequest,ACCESS_AUTHORIZATION_HEADER);
             String refreshTokenValue = jwtUtil.getJwtFromHeader(httpServletRequest,REFRESH_AUTHORIZATION_HEADER);
-
 
             try {
                 if (StringUtils.hasText(accessTokenValue)) { // 토큰이 존재하면 검증 시작

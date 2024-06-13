@@ -42,8 +42,8 @@ public class ScheduleController {
             HttpServletRequest request
             )throws IOException
     {
-        // log.info("asdaf{}", scheduleRequestDto.getTitle());
-        // log.info("asdfa{}", scheduleRequestDto.getContents());
+        // log.info("title{}", scheduleRequestDto.getTitle());
+        // log.info("contents{}", scheduleRequestDto.getContents());
 
         User user = (User) request.getAttribute("user");
         return new ResponseEntity<>(scheduleService.createSchedule(scheduleRequestDto,user), HttpStatus.OK);
