@@ -39,8 +39,4 @@ public class Comment extends Timestamped{
         this.contents = commentRequestDto.getContents();
     }
 
-    //user 추가
-
-
-
 }

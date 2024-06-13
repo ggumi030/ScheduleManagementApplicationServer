@@ -30,7 +30,7 @@ public class CommentService {
     }
 
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto, User user) {
-        Schedule schedule = scheduleService.findSchedule(commentRequestDto.getSchedule_id());
+        Schedule schedule = scheduleService.findSchedule(commentRequestDto.getScheduleId());
 
         Comment comment = new Comment(commentRequestDto,schedule,user);
         Comment saveComment = commentRepository.save(comment);
@@ -42,8 +42,8 @@ public class CommentService {
     public CommentResponseDto updateComment(CommentModRequestDto commentRequestDto, User user) {
 
         Comment comment = checkException(
-                commentRequestDto.getComment_id(),
-                commentRequestDto.getSchedule_id(),
+                commentRequestDto.getCommentId(),
+                commentRequestDto.getScheduleId(),
                 user.getUsername());
 
         comment.update(commentRequestDto);
@@ -55,8 +55,8 @@ public class CommentService {
     public void deleteComment(CommentDelRequestDto commentRequestDto, User user) {
 
         Comment comment = checkException(
-                commentRequestDto.getComment_id(),
-                commentRequestDto.getSchedule_id(),
+                commentRequestDto.getCommentId(),
+                commentRequestDto.getScheduleId(),
                 user.getUsername());
 
         commentRepository.delete(comment);

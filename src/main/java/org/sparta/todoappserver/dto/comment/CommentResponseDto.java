@@ -11,16 +11,16 @@ public class CommentResponseDto {
     private Long id;
     private String contents;
     private String username;
-    private Long schedule_id;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private Long scheduleId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public CommentResponseDto(Comment saveComment) {
         this.id = saveComment.getId();
         this.contents = saveComment.getContents();
         this.username = saveComment.getUser().getUsername();
-        this.schedule_id = saveComment.getSchedule().getId();
-        this.created_at = saveComment.getCreatedAt();
-        this.updated_at = saveComment.getModifiedAt();
+        this.scheduleId = saveComment.getSchedule().getId();
+        this.createdAt = saveComment.getCreatedAt();
+        this.updatedAt = saveComment.getModifiedAt();
     }
 }

@@ -7,10 +7,10 @@ import lombok.Getter;
 @Getter
 public class CommentModRequestDto {
     @NotNull(message = "댓글 아이디가 필수로 입력되어야합니다.")
-    private Long comment_id;
+    private Long commentId;
 
     @NotNull(message = "일정 아이디가 필수로 입력되어야합니다.")
-    private Long schedule_id;
+    private Long scheduleId;
 
     @NotEmpty(message = "댓글 내용은 한 글자 이상 필수로 입력되어야합니다.")
     private String contents;
